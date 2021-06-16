@@ -3,5 +3,5 @@
 	email = kai.zsv@gmail.com
 [core]
 	filemode = false
-    excludesfile = ~/.gitignore
-    editor = vim
+	excludesfile = ~/.gitignore
+	editor = vim

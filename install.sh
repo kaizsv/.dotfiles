@@ -27,7 +27,7 @@ if [ $UNAME == "Linux" ]; then
     unset DEBS
 
     # vim-plug
-    [ ! -f "$HOME/.vim/autoload/plug.vim" ] && \
+    [ -f "$HOME/.vim/autoload/plug.vim" ] || \
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -36,17 +36,17 @@ if [ $UNAME == "Linux" ]; then
     [ -d "$HOME/Templates" ] && touch ~/Templates/UntitiledDocument
 
     # cron job: * * * * * export DISPLAY=:0; /usr/bin/quiterss
-    [ ! -d "$HOME/usr/quiterss" ] && \
+    [ -d "$HOME/usr/quiterss" ] || \
         git clone https://github.com/QuiteRSS/quiterss.git ~/usr/quiterss
-    [ ! -d "$HOME/usr/goldendict" ] && \
+    [ -d "$HOME/usr/goldendict" ] || \
         git clone https://github.com/goldendict/goldendict.git ~/usr/goldendict
 
     # install dotfiles
     if [ -x "$(command -v stow)" ]; then
         HOME_SYMLINKS=$(find $HOME -maxdepth 1 -type l)
-        for target in "gdb git vim tmux bash"
+        for target in gdb git vim tmux bash
         do
-            [[ "$HOME_SYMLINKS" == *"$target"* ]] && \
+            [[ "$HOME_SYMLINKS" == *"$target"* ]] || \
                 stow --dotfiles $target -t $HOME
         done
         unset HOME_SYMLINKS
