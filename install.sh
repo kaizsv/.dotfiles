@@ -43,12 +43,16 @@ if [ $UNAME == "Linux" ]; then
 
     # install dotfiles
     if [ -x "$(command -v stow)" ]; then
+        HOME_SYMLINKS=$(find $HOME -maxdepth 1 -type l)
         for target in "gdb git vim tmux bash"
         do
-            stow --dotfiles $target -t $HOME
+            [[ "$HOME_SYMLINKS" == *"$target"* ]] && \
+                stow --dotfiles $target -t $HOME
         done
+        unset HOME_SYMLINKS
     else
-        echo "Install stow"
+        echo "Warn: No stow. Please install stow!" 1>&2
+        exit 1
     fi
 
 fi
