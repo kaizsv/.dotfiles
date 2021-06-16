@@ -1,0 +1,7 @@
+[user]
+	name = kaizsv
+	email = kai.zsv@gmail.com
+[core]
+	filemode = false
+    excludesfile = ~/.gitignore
+    editor = vim

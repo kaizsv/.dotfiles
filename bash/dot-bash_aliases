@@ -1,0 +1,23 @@
+mcd() { mkdir -p $1 && cd $1; }
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias -- -='cd -'       # - Go back
+alias husr='cd ~/usr'
+alias htmp='cd ~/tmp'
+
+alias left='ls -t -1' # last modified
+alias l.='ls -d .* --color=auto' # hidden files
+
+alias trash='mv --force -t ~/.local/share/Trash/files '
+alias historygrep='history | grep'
+alias grepre='grep -rn -e'
+
+alias tarxz='tar -Jcvf' # out.tar.xz file dir ...
+alias tarunxz='tar -Jxvf'
+alias tarungz='tar -zxvf'
+alias ziprec='zip -r'
+
+alias emacsnw='emacs -nw'
+alias ports='netstat -tulanp'

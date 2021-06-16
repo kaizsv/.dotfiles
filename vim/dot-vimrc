@@ -1,0 +1,82 @@
+set nu
+set ai
+"set bg=light
+set tabstop=4
+set shiftwidth=4
+set mouse=a
+set autoindent
+set smartindent
+set expandtab
+set modifiable
+set cursorline
+set splitright
+set hlsearch
+nmap <BS> :noh<CR>
+set colorcolumn=80
+set tags=./tags,./TAGS,tags;~,TAGS;~
+" If not work: highlight ColorColumn guibg=#000000 ctermbg=0
+highlight ColorColumn ctermbg=240
+imap jj <Esc>
+autocmd Filetype tex set spell
+" autocmd Filetype tex setlocal spellfile+=~/.vim/spell/en.utf-8.spf
+autocmd Filetype tex set cursorline!
+autocmd Filetype tex set shiftwidth=2
+autocmd Filetype make setlocal noexpandtab
+syntax on
+
+call plug#begin('~/.vim/plugged')
+" :PlugInstall
+" :PlugUpdate
+" delete Plug here; :source ~/.vimrc; :PlugClean
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/taglist.vim'
+Plug 'lervag/vimtex'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'
+call plug#end()
+
+" vim-latex
+filetype plugin on
+set shellslash
+
+function! UpdateAllTagsCscope()
+    let tags = 'ctags -R'
+    let scope = 'cscope -Rbpk'
+    let rtags = system(tags)
+    let rscope = system(scope)
+endfunction
+
+" cscope -Rbpk
+set cscopetag
+set csto=0
+
+if filereadable("cscope.out")
+    cs add cscope.out
+elseif $CSCOPE_DB != ""
+    cs add $CSCOPE_DB
+endif
+set cscopeverbose
+
+" taglist
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
+set ut=100
+
+" NERDTree
+let NERDTreeWinPos=1
+
+nmap <F7> :call UpdateAllTagsCscope()<CR><CR>
+nmap <F8> :TlistToggle<CR><CR>
+nmap <F9> :NERDTreeToggle<CR><CR>
+
+nmap zs :cs find s <C-R>=expand("<cword>")<CR><CR> " Find this C symbol
+nmap zz :cs find g <C-R>=expand("<cword>")<CR><CR> " Find this global definition
+nmap zd :cs find d <C-R>=expand("<cword>")<CR><CR> " Find functions called by this function
+nmap zc :cs find c <C-R>=expand("<cword>")<CR><CR> " Find functions calling this function
+nmap zt :cs find t <C-R>=expand("<cword>")<CR><CR> " Find this text string
+nmap ze :cs find e <C-R>=expand("<cword>")<CR><CR> " Find this egrep pattern
+nmap zf :cs find f <C-R>=expand("<cfile>")<CR><CR> " Find this file
+nmap zi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR> " Find files #including this file
