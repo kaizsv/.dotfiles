@@ -13,16 +13,30 @@ if [ $UNAME == "Linux" ]; then
         libvirt-daemon-system clang-format haskell-platform texlive-full
         build-essential gcc-arm-none-eabi gdb-multiarch"
 
-    if [[ "$(lsb_release -d)" == *"Ubuntu"* ]]; then
-        sudo apt update
-        sudo apt install -y $PACS $DEBS linux-tools-common linux-tools-generic
-    elif [[ "$(lsb_release -d)" == *"Debian"* ]]; then
-        sudo apt update
-        sudo apt install -y $PACS $DEBS linux-tools linux-perf
-    elif [ -f "/etc/arch-release" ]; then
-        sudo pacman -Syu $PACS ctags libvirt clang texlive-most atom
-    fi
+    LSB_RELEASE=$(cat /etc/lsb-release | cut -d '=' -f 2)
+    case $LSB_RELEASE in
+        *Ubuntu*)
+            sudo apt update
+            sudo apt install -y $PACS $DEBS linux-tools-common \
+                linux-tools-generic
+            ;;
+        *Debian*)
+            sudo apt update
+            sudo apt install -y $PACS $DEBS linux-tools linux-perf
+            ;;
+        *Arch*)
+            sudo pacman --needed -Syu $PACS ctags libvirt clang texlive-most \
+                atom base-devel
+            [ -d "$HOME/usr/yay" ] || \
+                git clone https://aur.archlinux.org/yay.git $HOME/usr/yay
+            ;;
+        *)
+            echo "Warn: Cannot read /etc/lsb-release" 1>&2
+            exit 1
+            ;;
+    esac
 
+    unset LSB_RELEASE
     unset PACS
     unset DEBS
 
@@ -31,11 +45,8 @@ if [ $UNAME == "Linux" ]; then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-    mkdir -p $HOME/usr
     mkdir -p $HOME/tmp
     [ -d "$HOME/Templates" ] && touch ~/Templates/UntitiledDocument
-
-    # cron job: * * * * * export DISPLAY=:0; /usr/bin/quiterss
     [ -d "$HOME/usr/quiterss" ] || \
         git clone https://github.com/QuiteRSS/quiterss.git ~/usr/quiterss
     [ -d "$HOME/usr/goldendict" ] || \
