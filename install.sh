@@ -7,7 +7,8 @@ if [ $UNAME == "Linux" ]; then
     PACS="vim git valgrind htop curl cloc tree tmux wget net-tools cscope stow
         cmake flex bison strace qemu tcl tk minicom autoconf vlc bash-completion
         nmap make trace-cmd okular evince graphviz gnuplot gcc thunderbird gdb
-        audacious gnome-tweak-tool pcsc-tools emacs libreoffice"
+        audacious gnome-tweak-tool pcsc-tools emacs libreoffice goldendict
+        quiterss"
     DEBS="software-properties-common python3-pip exuberant-ctags python3-dev
         apt-transport-https autotools-dev qemu-utils libvirt-clients pcscd
         libvirt-daemon-system clang-format haskell-platform texlive-full
@@ -46,12 +47,9 @@ if [ $UNAME == "Linux" ]; then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+    mkdir -p $HOME/usr
     mkdir -p $HOME/tmp
     [ -d "$HOME/Templates" ] && touch ~/Templates/UntitiledDocument
-    [ -d "$HOME/usr/quiterss" ] || \
-        git clone https://github.com/QuiteRSS/quiterss.git ~/usr/quiterss
-    [ -d "$HOME/usr/goldendict" ] || \
-        git clone https://github.com/goldendict/goldendict.git ~/usr/goldendict
 
     # install dotfiles
     if [ -x "$(command -v stow)" ]; then
