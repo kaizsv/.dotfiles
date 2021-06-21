@@ -26,7 +26,8 @@ if [ $UNAME == "Linux" ]; then
             ;;
         *Arch*)
             sudo pacman --needed -Syu $PACS ctags libvirt clang texlive-most \
-                atom base-devel
+                atom base-devel xdg-desktop-portal xdg-desktop-portal-gtk \
+                pipewire libpipewire02
             [ -d "$HOME/usr/yay" ] || \
                 git clone https://aur.archlinux.org/yay.git $HOME/usr/yay
             ;;
