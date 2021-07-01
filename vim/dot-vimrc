@@ -28,7 +28,7 @@ call plug#begin('~/.vim/plugged')
 " :PlugInstall
 " :PlugUpdate
 " delete Plug here; :source ~/.vimrc; :PlugClean
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdtree'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/taglist.vim'
@@ -36,6 +36,7 @@ Plug 'lervag/vimtex'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'whonore/Coqtail'
 call plug#end()
 
 " vim-latex
@@ -67,6 +68,10 @@ set ut=100
 
 " NERDTree
 let NERDTreeWinPos=1
+let NERDTreeIgnore=['\.vo[ks]*[[file]]','\.glob[[file]]','\.agdai[[file]]',]
+autocmd VimEnter * if !argc() | NERDTree | endif
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 &&
+    \ exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 nmap <F7> :call UpdateAllTagsCscope()<CR><CR>
 nmap <F8> :TlistToggle<CR><CR>
