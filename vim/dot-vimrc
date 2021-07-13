@@ -70,7 +70,7 @@ set ut=100
 let NERDTreeWinPos=1
 let NERDTreeIgnore=['\.vo$[[file]]','\.vo[ks]$[[file]]','\.glob$[[file]]',
     \ '\.o$[[file]]','\.ko$[[file]]','\.mod[[file]]','\.out$[[file]]',
-    \ '^tags$[[file]]']
+    \ '^tags$[[file]]','\.hi$[[file]]']
 autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 &&
     \ exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
