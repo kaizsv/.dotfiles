@@ -39,10 +39,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'whonore/Coqtail'
 call plug#end()
 
-" vim-latex
-filetype plugin on
-set shellslash
-
 function! UpdateAllTagsCscope()
     let tags = 'ctags -R'
     let scope = 'cscope -Rbpk'
