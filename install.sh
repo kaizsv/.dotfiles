@@ -8,7 +8,7 @@ if [ $UNAME == "Linux" ]; then
         cmake flex bison strace qemu tcl tk minicom autoconf vlc bash-completion
         nmap make trace-cmd okular evince graphviz gnuplot gcc thunderbird gdb
         audacious gnome-tweak-tool pcsc-tools libreoffice goldendict quiterss
-        cppcheck"
+        cppcheck solfege"
     DEBS="software-properties-common python3-pip exuberant-ctags python3-dev
         apt-transport-https autotools-dev qemu-utils libvirt-clients pcscd
         libvirt-daemon-system clang-format haskell-platform texlive-full
