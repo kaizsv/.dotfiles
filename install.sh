@@ -14,7 +14,11 @@ if [ $UNAME == "Linux" ]; then
         libvirt-daemon-system clang-format haskell-platform texlive-full
         build-essential gcc-arm-none-eabi gdb-multiarch"
 
-    LSB_RELEASE=$(cat /etc/lsb-release | cut -d '=' -f 2)
+    if [ -f /etc/lsb-release ]; then
+        LSB_RELEASE=$(cat /etc/lsb-release | cut -d '=' -f 2)
+    else
+        LSB_RELEASE=$(cat /etc/os-release | cut -d '=' -f 2)
+    fi
     case $LSB_RELEASE in
         *Ubuntu*)
             sudo apt update
@@ -23,7 +27,8 @@ if [ $UNAME == "Linux" ]; then
             ;;
         *Debian*)
             sudo apt update
-            sudo apt install -y $PACS $DEBS linux-tools linux-perf
+            sudo apt install -y $PACS $DEBS linux-perf \
+                gnome-shell-extension-dashtodock
             ;;
         *Arch*)
             sudo pacman --needed -Syu $PACS ctags libvirt clang texlive-most \
