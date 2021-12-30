@@ -8,11 +8,11 @@ if [ $UNAME == "Linux" ]; then
         cmake flex bison strace qemu tcl tk minicom autoconf vlc bash-completion
         nmap make trace-cmd okular evince graphviz gnuplot gcc thunderbird gdb
         audacious gnome-tweak-tool pcsc-tools libreoffice goldendict quiterss
-        cppcheck solfege"
+        cppcheck solfege lm-sensors"
     DEBS="software-properties-common python3-pip exuberant-ctags python3-dev
         apt-transport-https autotools-dev qemu-utils libvirt-clients pcscd
         libvirt-daemon-system clang-format haskell-platform texlive-full
-        build-essential gcc-arm-none-eabi gdb-multiarch"
+        build-essential gcc-arm-none-eabi gdb-multiarch epiphany-browser"
 
     if [ -f /etc/lsb-release ]; then
         LSB_RELEASE=$(cat /etc/lsb-release | cut -d '=' -f 2)
@@ -28,12 +28,12 @@ if [ $UNAME == "Linux" ]; then
         *Debian*)
             sudo apt update
             sudo apt install -y $PACS $DEBS linux-perf \
-                gnome-shell-extension-dashtodock
+                gnome-shell-extension-dashtodock torbrowser-launcher
             ;;
         *Arch*)
             sudo pacman --needed -Syu $PACS ctags libvirt clang texlive-most \
                 atom base-devel xdg-desktop-portal xdg-desktop-portal-gtk \
-                pipewire libpipewire02
+                pipewire libpipewire02 epiphany
             [ -d "$HOME/usr/yay" ] || \
                 git clone https://aur.archlinux.org/yay.git $HOME/usr/yay
             ;;
