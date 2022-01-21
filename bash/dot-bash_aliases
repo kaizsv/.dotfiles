@@ -12,7 +12,7 @@ alias l.='ls -d .* --color=auto' # hidden files
 
 alias trash='mv --force -t ~/.local/share/Trash/files '
 alias historygrep='history | grep'
-alias grepre='grep -rn -e'
+alias regrep='grep --color -rn -e'
 
 alias tarxz='tar -Jcvf' # out.tar.xz file dir ...
 alias tarunxz='tar -Jxvf'
