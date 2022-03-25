@@ -7,12 +7,13 @@ if [ $UNAME == "Linux" ]; then
     PACS="vim git valgrind htop curl cloc tree tmux wget net-tools cscope stow
         cmake flex bison strace qemu tcl tk minicom autoconf vlc bash-completion
         nmap make trace-cmd okular evince graphviz gnuplot gcc thunderbird gdb
-        audacious gnome-tweak-tool pcsc-tools libreoffice goldendict quiterss
-        cppcheck solfege lm-sensors"
+        audacious gnome-tweaks pcsc-tools libreoffice goldendict quiterss
+        cppcheck solfege lm-sensors kmod"
     DEBS="software-properties-common python3-pip exuberant-ctags python3-dev
         apt-transport-https autotools-dev qemu-utils libvirt-clients pcscd
         libvirt-daemon-system clang-format haskell-platform texlive-full
-        build-essential gcc-arm-none-eabi gdb-multiarch epiphany-browser"
+        build-essential gcc-arm-none-eabi gdb-multiarch epiphany-browser
+        libssl-dev libelf-dev"
 
     if [ -f /etc/lsb-release ]; then
         LSB_RELEASE=$(cat /etc/lsb-release | cut -d '=' -f 2)
