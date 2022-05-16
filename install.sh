@@ -8,12 +8,12 @@ if [ $UNAME == "Linux" ]; then
         cmake flex bison strace qemu tcl tk minicom autoconf vlc bash-completion
         nmap make trace-cmd okular evince graphviz gnuplot gcc thunderbird gdb
         audacious gnome-tweaks pcsc-tools libreoffice goldendict quiterss
-        cppcheck solfege lm-sensors kmod"
+        cppcheck solfege lm-sensors kmod virt-manager"
     DEBS="software-properties-common python3-pip exuberant-ctags python3-dev
         apt-transport-https autotools-dev qemu-utils libvirt-clients pcscd
         libvirt-daemon-system clang-format haskell-platform texlive-full
-        build-essential gcc-arm-none-eabi gdb-multiarch epiphany-browser
-        libssl-dev libelf-dev"
+        build-essential gcc-arm-none-eabi gdb-multiarch chromium-browser
+        libssl-dev libelf-dev qemu-kvm bridge-utils"
 
     if [ -f /etc/lsb-release ]; then
         LSB_RELEASE=$(cat /etc/lsb-release | cut -d '=' -f 2)
@@ -52,6 +52,10 @@ if [ $UNAME == "Linux" ]; then
     [ -f "$HOME/.vim/autoload/plug.vim" ] || \
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    # Rust
+    [ -x "$(command -v rustc)" ] || \
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
     mkdir -p $HOME/usr
     mkdir -p $HOME/tmp
